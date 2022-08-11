@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using System.Text.Json.Serialization;
 
 namespace Catalog.Api.Entities
 {
@@ -10,6 +11,7 @@ namespace Catalog.Api.Entities
         public string Id { get; set; } 
 
         [BsonElement("ProductName")]
+        [JsonPropertyName("ProductName")] 
         public string Name { get; set; } 
 
         public string Category { get; set; }
