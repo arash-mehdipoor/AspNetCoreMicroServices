@@ -29,7 +29,7 @@ namespace Discount.Api.Repositories
 
         public async Task<bool> Update(Coupon coupon)
         {
-            using var connection = new NpgsqlConnection(_configuration.GetValue<string>(""));
+            using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionStrings"));
 
             var query = @$"UPDATE Coupon SET ProductName = @ProductName ,Description =@Description,Amount =@Amount) WHERE Id = @Id";
 
@@ -43,7 +43,7 @@ namespace Discount.Api.Repositories
 
         public async Task<bool> Create(Coupon coupon)
         {
-            using var connection = new NpgsqlConnection(_configuration.GetValue<string>(""));
+            using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionStrings"));
 
             var query = @"INSERT INTO Coupon (ProductName,Description,Amount) VALUES (@ProductName,@Description,@Amount)";
 
@@ -56,7 +56,7 @@ namespace Discount.Api.Repositories
 
         public async Task<bool> Delete(string productName)
         {
-            using var connection = new NpgsqlConnection(_configuration.GetValue<string>(""));
+            using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionStrings"));
 
             var query = @"DELETE FROM Coupon WHERE ProductName = @ProductName";
 
