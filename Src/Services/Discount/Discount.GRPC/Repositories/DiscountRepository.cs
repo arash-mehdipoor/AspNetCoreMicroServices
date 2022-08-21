@@ -43,7 +43,7 @@ namespace Discount.GRPC.Repositories
 
         public async Task<bool> Create(Coupon coupon)
         {
-            using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionStrings"));
+            using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
 
             var query = @"INSERT INTO Coupon (ProductName,Description,Amount) VALUES (@ProductName,@Description,@Amount)";
 
