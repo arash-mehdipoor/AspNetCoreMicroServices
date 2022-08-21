@@ -15,7 +15,7 @@ namespace Discount.GRPC.Repositories
 
         public async Task<Coupon> GetDiscount(string productName)
         {
-            using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionStrings"));
+            using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
 
             var query = @"SELECT * FROM Coupon WHERE ProductName = @ProductName";
 
@@ -29,7 +29,7 @@ namespace Discount.GRPC.Repositories
 
         public async Task<bool> Update(Coupon coupon)
         {
-            using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionStrings"));
+            using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
 
             var query = @$"UPDATE Coupon SET ProductName = @ProductName ,Description =@Description,Amount =@Amount) WHERE Id = @Id";
 
@@ -56,7 +56,7 @@ namespace Discount.GRPC.Repositories
 
         public async Task<bool> Delete(string productName)
         {
-            using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionStrings"));
+            using var connection = new NpgsqlConnection(_configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
 
             var query = @"DELETE FROM Coupon WHERE ProductName = @ProductName";
 
