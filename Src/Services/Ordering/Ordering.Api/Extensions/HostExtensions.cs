@@ -47,7 +47,6 @@ namespace Ordering.Api.Extensions
         {
             context.Database.Migrate();
             seeder(context, services);
-        }
-
+        } 
     }
 }

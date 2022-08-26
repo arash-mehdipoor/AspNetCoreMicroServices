@@ -27,7 +27,18 @@ namespace Ordering.Infrastructure.Persistence
                     EmailAddress = "Arash@gmail.com",
                     AddressLine = "Tehran",
                     Country = "Tehran",
-                    TotalPrice = 150
+                    TotalPrice = 150,
+                    CVV = "CVV",
+                    CardName = "CardName",
+                    CardNumber = "CardNumber",
+                    State= "State",
+                    ZipCode= "ZipCode",
+                    Expiration = "Expiration",
+                    PaymentMethod =1,
+                    CreatedBy = "11",
+                    CreatedDate = DateTime.Now,
+                    LastModifiedBy = "2",
+                    LastModifiedDate = DateTime.Now
                 }
             };
         }
