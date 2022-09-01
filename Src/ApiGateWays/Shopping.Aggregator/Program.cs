@@ -1,8 +1,4 @@
-
-using Ocelot.Cache.CacheManager;
-using Ocelot.DependencyInjection;
-using Ocelot.Middleware;
-
+using Shopping.Aggregator.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,15 +9,16 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-IConfiguration configuration = builder.Configuration;
-IWebHostEnvironment webHostEnvironment = builder.Environment;
-builder.Configuration.SetBasePath(webHostEnvironment.ContentRootPath)
-.AddJsonFile("ocelot.json")
-.AddOcelot(webHostEnvironment)
-.AddEnvironmentVariables();
 
-builder.Services.AddOcelot(configuration)
-    .AddCacheManager(settings => settings.WithDictionaryHandle());
+builder.Services.AddHttpClient<ICatalogService, CatalogService>(c =>
+      c.BaseAddress = new Uri(builder.Configuration["ApiSettings:CatalogUrl"]));
+
+builder.Services.AddHttpClient<IBasketService, BasketService>(c =>
+      c.BaseAddress = new Uri(builder.Configuration["ApiSettings:BasketUrl"]));
+
+builder.Services.AddHttpClient<IOrderService, OrderService>(c =>
+      c.BaseAddress = new Uri(builder.Configuration["ApiSettings:OrderingUrl"]));
+
 
 var app = builder.Build();
 
@@ -37,7 +34,5 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
-
-app.UseOcelot().Wait();
 
 app.Run();
