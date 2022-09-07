@@ -11,13 +11,22 @@ builder.Services.AddSwaggerGen();
 
 
 builder.Services.AddHttpClient<ICatalogService, CatalogService>(c =>
-      c.BaseAddress = new Uri(builder.Configuration["ApiSettings:CatalogUrl"]));
+{
+    c.BaseAddress = new Uri(builder.Configuration["ApiSettings:CatalogUrl"]);
+    c.Timeout = new TimeSpan(0, 0, 30);
+});
 
 builder.Services.AddHttpClient<IBasketService, BasketService>(c =>
-      c.BaseAddress = new Uri(builder.Configuration["ApiSettings:BasketUrl"]));
+{
+    c.BaseAddress = new Uri(builder.Configuration["ApiSettings:BasketUrl"]);
+    c.Timeout = c.Timeout = new TimeSpan(0, 0, 30);
+});
 
 builder.Services.AddHttpClient<IOrderService, OrderService>(c =>
-      c.BaseAddress = new Uri(builder.Configuration["ApiSettings:OrderingUrl"]));
+{
+    c.BaseAddress = new Uri(builder.Configuration["ApiSettings:OrderingUrl"]);
+    c.Timeout = c.Timeout = new TimeSpan(0, 0, 30);
+});
 
 
 var app = builder.Build();

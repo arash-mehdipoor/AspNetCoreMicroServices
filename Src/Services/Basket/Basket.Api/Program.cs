@@ -16,6 +16,15 @@ builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetValue<string>("CacheSetting:ConnectionString");
+    options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions()
+    {
+        ConnectTimeout = 5000,
+        ConnectRetry = 5,
+        SyncTimeout = 5000,
+        AbortOnConnectFail = false,
+        Ssl=true,
+        SslProtocols = System.Security.Authentication.SslProtocols.Tls12
+    };
 });
 
 builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(op =>
